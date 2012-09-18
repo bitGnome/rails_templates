@@ -1,3 +1,13 @@
+# RVM
+current_ruby = %x{rvm list}.match(/\=\*\s(.*)\s\[/)[1].strip
+run "rvm gemset create #{app_name}"
+run "rvm #{current_ruby}@#{app_name} gem install bundler"
+run "rvm #{current_ruby}@#{app_name} -S bundle install"
+
+file ".rvmrc", <<-END
+rvm use #{current_ruby}@#{app_name}
+END
+
 gem("haml-rails")
 gem("twitter-bootstrap-rails")
 generate("bootstrap:install")
@@ -58,16 +68,6 @@ if yes?("Would you like create initial Scaffolding? (yes|no)")
   end
   
 end
-
-# RVM
-current_ruby = %x{rvm list}.match(/\=\*\s(.*)\s\[/)[1].strip
-run "rvm gemset create #{app_name}"
-run "rvm #{current_ruby}@#{app_name} gem install bundler"
-run "rvm #{current_ruby}@#{app_name} -S bundle install"
-
-file ".rvmrc", <<-END
-rvm use #{current_ruby}@#{app_name}
-END
   
 git :init
 git :add  => "."
