@@ -9,6 +9,7 @@ rvm use #{current_ruby}@#{app_name}
 END
 
 gem("haml-rails")
+gem("less-rails")
 gem("twitter-bootstrap-rails")
 generate("bootstrap:install")
 
@@ -34,7 +35,8 @@ generate("simple_form:install --bootstrap")
 
 gem("font-awesome-sass-rails", :group  => "assets" )
 
-run "bundle"
+run "cd #{app_name}"
+run "bundle install"
 
 if yes?("Would you like create initial Scaffolding? (yes|no)")
   name = ask("Name of the scaffolding: ")
