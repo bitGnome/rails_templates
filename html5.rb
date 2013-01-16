@@ -9,8 +9,18 @@ rvm use #{current_ruby}@#{app_name}
 END
 
 gem("haml-rails")
+gem("therubyracer")
 gem("less-rails")
 gem("twitter-bootstrap-rails")
+gem("apotomo")
+
+# Testing support
+gem("factory_girl_rails", :group => "test")
+gem("rspec-rails", :group => "test")
+gem("database_cleaner", :group => "test")
+gem("cucumber-rails", :group => "test")
+gem("capybara", :group => "test" )
+
 generate("bootstrap:install")
 
 layout_type = ask("What type of bootstrap layout would you like? (fixed | fluid)")
